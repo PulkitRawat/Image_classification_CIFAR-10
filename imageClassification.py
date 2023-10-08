@@ -13,17 +13,26 @@ def preprocessing(data_dict: dict):
     labels = np.array(data_dict[b'labels'])
     return data, labels
 
-train_data = unpickle('data_batch_1')
+train_data = []
 # print(train.keys())
 
-# for i in range(6):
-#     file = f'data_batch_{i}'
-#     x = unpickle(file)
-#     train.append(x)
+for i in range(6):
+    file = f'data_batch_{i}'
+    x = unpickle(file)
+    train_data.append(x)
+
+train_images_batches = []
+train_labels_batches = []
+
+for batch_data in train_data:
+    images, labels = preprocessing(batch_data)
+    train_images_batches.append(images)
+    train_labels_batches.append(labels)
 
 test_data = unpickle('test_batch')
 
-train_images, train_labels = preprocessing(train_data)
+train_images  = np.concatenate(train_images_batches, axis =0)
+tran_labels = np.concatenate(train_labels_batches, axis =0)
 test_images, test_labels = preprocessing(test_data)
 
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
