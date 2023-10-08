@@ -35,7 +35,7 @@ for batch_data in train_data:
 test_data = unpickle('test_batch')
 
 train_images  = np.concatenate(train_images_batches, axis =0)
-tran_labels = np.concatenate(train_labels_batches, axis =0)
+train_labels = np.concatenate(train_labels_batches, axis =0)
 test_images, test_labels = preprocessing(test_data)
 
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
@@ -55,3 +55,8 @@ model.add(layers.Dense(10, activation='softmax'))
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',  # For integer labels
               metrics=['accuracy'])
+
+history = model.fit(train_images, train_labels, epochs=10, validation_split= 0.2)
+
+test_loss, test_accuracy = model.evaluate(test_images, test_labels)
+print(f"Test accuracy: {test_accuracy}")
