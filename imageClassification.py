@@ -19,7 +19,7 @@ def preprocessing(data_dict: dict):
 train_data = []
 # print(train.keys())
 
-for i in range(6):
+for i in range(1,6):
     file = f'data_batch_{i}'
     x = unpickle(file)
     train_data.append(x)
@@ -56,7 +56,18 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',  # For integer labels
               metrics=['accuracy'])
 
-history = model.fit(train_images, train_labels, epochs=10, validation_split= 0.2)
+history = model.fit(train_images, train_labels, epochs=20, validation_split= 0.2)
 
 test_loss, test_accuracy = model.evaluate(test_images, test_labels)
 print(f"Test accuracy: {test_accuracy}")
+
+import matplotlib.pyplot as plt
+
+# Plot training history
+plt.plot(history.history['accuracy'], label='accuracy')
+plt.plot(history.history['val_accuracy'], label = 'val_accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.ylim([0, 1])
+plt.legend(loc='lower right')
+plt.show()
