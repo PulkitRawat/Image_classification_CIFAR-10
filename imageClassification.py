@@ -52,11 +52,12 @@ model.add(layers.Flatten())
 model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(10, activation='softmax'))
 
-model.compile(optimizer='adam',
+optimizer = keras.optimizers.Adam(learning_rate=0.001)
+model.compile(optimizer= optimizer,
               loss='sparse_categorical_crossentropy',  # For integer labels
               metrics=['accuracy'])
 
-history = model.fit(train_images, train_labels, epochs=20, validation_split= 0.2)
+history = model.fit(train_images, train_labels, epochs=10, validation_split= 0.2)
 
 test_loss, test_accuracy = model.evaluate(test_images, test_labels)
 print(f"Test accuracy: {test_accuracy}")
