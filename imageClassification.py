@@ -1,9 +1,12 @@
 import pickle 
 import numpy as np
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 from tensorflow import keras
 from keras import layers, models
+from keras import regularizers
+
 def unpickle(file:str):
     with open (file,'rb') as f:
         dict = pickle.load(f, encoding= 'bytes')
@@ -49,7 +52,7 @@ model.add(layers.MaxPooling2D((2,2)))
 model.add(layers.Conv2D(64,(3,3),activation='relu'))
 
 model.add(layers.Flatten())
-model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(64, activation='relu', kernel_regularizer= regularizers.l2(0.01)))
 model.add(layers.Dense(10, activation='softmax'))
 
 optimizer = keras.optimizers.Adam(learning_rate=0.001)
@@ -62,7 +65,7 @@ history = model.fit(train_images, train_labels, epochs=10, validation_split= 0.2
 test_loss, test_accuracy = model.evaluate(test_images, test_labels)
 print(f"Test accuracy: {test_accuracy}")
 
-import matplotlib.pyplot as plt
+
 
 # Plot training history
 plt.plot(history.history['accuracy'], label='accuracy')
