@@ -1,6 +1,5 @@
 import pickle 
 import numpy as np
-import tensorflow as tf
 import matplotlib.pyplot as plt
 
 from tensorflow import keras
@@ -67,11 +66,11 @@ print(f"Test accuracy: {test_accuracy}")
 
 
 
-# Plot training history
-plt.plot(history.history['accuracy'], label='accuracy')
-plt.plot(history.history['val_accuracy'], label = 'val_accuracy')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.ylim([0, 1])
-plt.legend(loc='lower right')
-plt.show()
+# # Plot training history
+# plt.plot(history.history['accuracy'], label='accuracy')
+# plt.plot(history.history['val_accuracy'], label = 'val_accuracy')
+# plt.xlabel('Epoch')
+# plt.ylabel('Accuracy')
+# plt.ylim([0, 1])
+# plt.legend(loc='lower right')
+# plt.show()
