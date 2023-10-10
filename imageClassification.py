@@ -2,7 +2,6 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 
-from tensorflow import keras
 from keras import layers, models
 
 def unpickle(file:str):
@@ -52,7 +51,7 @@ model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(10, activation='softmax'))
 
 model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',  # For integer labels
+              loss='sparse_categorical_crossentropy',  
               metrics=['accuracy'])
 
 history = model.fit(train_images, train_labels, epochs=10, validation_split= 0.2)
@@ -68,6 +67,5 @@ print(f"Test accuracy: {test_accuracy}")
 # plt.ylim([0, 1])
 # plt.legend(loc='lower right')
 # plt.show()
-input_shape = model.layers[0].input_shape
-print("Expected Input Shape:", input_shape)
+
 model.save('IC_model', overwrite= True)
