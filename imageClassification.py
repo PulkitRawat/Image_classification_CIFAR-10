@@ -68,5 +68,6 @@ print(f"Test accuracy: {test_accuracy}")
 # plt.ylim([0, 1])
 # plt.legend(loc='lower right')
 # plt.show()
-
-model.save('IC_model')
+input_shape = model.layers[0].input_shape
+print("Expected Input Shape:", input_shape)
+model.save('IC_model', overwrite= True)
